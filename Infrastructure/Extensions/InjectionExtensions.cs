@@ -16,6 +16,7 @@ namespace Infrastructure.Extensions
                 options.UseSqlServer(configuration.GetConnectionString("SqlConnection"),
                     x => x.MigrationsAssembly(assembly)), ServiceLifetime.Transient
             );
+
             return services;
         }
     }
