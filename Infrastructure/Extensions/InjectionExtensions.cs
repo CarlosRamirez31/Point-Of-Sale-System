@@ -1,4 +1,6 @@
 ﻿using Infrastructure.Persistences.Contexts;
+using Infrastructure.Persistences.Interfaces;
+using Infrastructure.Persistences.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +18,8 @@ namespace Infrastructure.Extensions
                 options.UseSqlServer(configuration.GetConnectionString("SqlConnection"),
                     x => x.MigrationsAssembly(assembly)), ServiceLifetime.Transient
             );
+
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             return services;
         }
