@@ -1,4 +1,4 @@
-﻿using Infrastructure.Commons.Bases;
+﻿using Infrastructure.Commons.Bases.Requests;
 using Infrastructure.Helpers;
 using Infrastructure.Persistences.Interfaces;
 using System.Linq.Dynamic.Core;

@@ -3,7 +3,7 @@ using Infrastructure.Persistences.Interfaces;
 
 namespace Infrastructure.Persistences.Repositories
 {
-    internal class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly PosContext _context;
         public ICategoryRepository Category { get; private set; }

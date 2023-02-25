@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Commons.Bases
+﻿namespace Infrastructure.Commons.Bases.Requests
 {
     public class BasePaginationRequest
     {
@@ -13,7 +13,7 @@
             get => NumRecordsPage;
             set
             {
-                NumRecordsPage = (value > NumMaxRecordsPage) ? NumMaxRecordsPage : value;
+                NumRecordsPage = value > NumMaxRecordsPage ? NumMaxRecordsPage : value;
             }
         }
     }

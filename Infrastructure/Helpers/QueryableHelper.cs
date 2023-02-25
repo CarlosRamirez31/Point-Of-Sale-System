@@ -1,4 +1,4 @@
-﻿using Infrastructure.Commons.Bases;
+﻿using Infrastructure.Commons.Bases.Requests;
 
 namespace Infrastructure.Helpers
 {
