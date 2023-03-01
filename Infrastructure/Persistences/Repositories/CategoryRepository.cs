@@ -22,7 +22,7 @@ namespace Infrastructure.Persistences.Repositories
             var response = new BaseEntityResponse<Category>();
 
             var categories = (from c in _context.Categories
-                              where c.AuditDeleteUser != null && c.AuditDeleteDate != null
+                              where c.AuditDeleteUser == null && c.AuditDeleteDate == null
                               select c).AsNoTracking().AsQueryable();
 
             if(filters.NumFilter is not null && !string.IsNullOrEmpty(filters.TextFilter))
@@ -52,7 +52,7 @@ namespace Infrastructure.Persistences.Repositories
             if (filters.Sort is null) filters.Sort = "CategoryId";
 
             response.TotalRecords = await categories.CountAsync();
-            response.Items = await Ordering(filters, categories, !(bool)filters.Download!).ToListAsync();
+            response.Items = await Ordering(filters, categories, filters.Download.GetValueOrDefault()).ToListAsync();
             return response;
         }
 
@@ -99,7 +99,7 @@ namespace Infrastructure.Persistences.Repositories
         {
             var category = _context.Categories.AsNoTracking().SingleOrDefault(c => c.CategoryId.Equals(CategoryId));
 
-            category.AuditDeleteUser = 1;
+            category!.AuditDeleteUser = 1;
             category.AuditDeleteDate = DateTime.Now;
 
             _context.Update(category);

@@ -1,4 +1,5 @@
-﻿using Infrastructure.Extensions;
+﻿using Application.Extensions;
+using Infrastructure.Extensions;
 
 namespace Api
 {
@@ -14,6 +15,7 @@ namespace Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddInjectionInfrastructure(Configuration);
+            services.AddInjectionApplication(Configuration);
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();

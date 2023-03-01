@@ -11,6 +11,6 @@
         public static string MESSAGE_ACTIVATE = "El registro se ha activado.";
         public static string MESSAGE_TOKEN = "Token generado correctamente.";
         public static string MESSAGE_VALIDATE = "Errores de validacion.";
-        public static string MESSAGE_FAILED = "Validacion Fallida.";
+        public static string MESSAGE_FAILED = "Operacion fallida.";
     }
 }

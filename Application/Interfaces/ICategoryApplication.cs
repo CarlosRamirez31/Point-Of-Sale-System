@@ -10,9 +10,9 @@ namespace Application.Interfaces
     {
         Task<BaseResponse<BaseEntityResponse<CategoryResponseDto>>> ListCategory(BaseFiltersRequest filters);
         Task<BaseResponse<IEnumerable<CategorySelectResponseDto>>> ListSelectCategory();
-        Task<BaseResponse<CategoryResponseDto>> CategoryById(int CategoryId);
-        Task<BaseResponse<bool>> RegisterCategory(CategoryRequestDto categoryRequest);
-        Task<BaseResponse<bool>> EditCategory(int CategoryId, CategoryRequestDto categoryRequest);
-        Task<BaseResponse<bool>> RemoveCategory(int CategoryId);
+        Task<BaseResponse<CategoryResponseDto>> CategoryById(int categoryId);
+        Task<BaseResponse<bool>> RegisterCategory(CategoryRequestDto requestDto);
+        Task<BaseResponse<bool>> EditCategory(int categoryId, CategoryRequestDto requestDto);
+        Task<BaseResponse<bool>> RemoveCategory(int categoryId);
     }
 }

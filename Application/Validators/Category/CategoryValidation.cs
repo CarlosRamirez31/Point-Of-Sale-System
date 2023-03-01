@@ -1,6 +1,5 @@
 ﻿using Application.Dtos.Request;
 using FluentValidation;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Application.Validators.Category
 {
