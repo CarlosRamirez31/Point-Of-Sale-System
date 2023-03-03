@@ -8,8 +8,9 @@ namespace Infrastructure.Persistences.Contexts.Configurations
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
-            builder.HasKey(e => e.ProductId).HasName("PK__Products__B40CC6CD4FEAA240");
+            builder.HasKey(e => e.Id).HasName("PK__Products__B40CC6CD4FEAA240");
 
+            builder.Property(e => e.Id).HasColumnName("ProductId");
             builder.Property(e => e.Name).HasMaxLength(50);
             builder.Property(e => e.SellPrice).HasColumnType("decimal(18, 2)");
 

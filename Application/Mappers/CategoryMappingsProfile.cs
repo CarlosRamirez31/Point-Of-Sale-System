@@ -14,12 +14,14 @@ namespace Application.Mappers
         {
             CreateMap<Category, CategoryResponseDto>()
                 .ForMember(x => x.CategoryState, x => x.MapFrom(y => y.State.Equals((int)StateType.Activo) ? "Activo" : "Inactivo"))
+                .ForMember(x => x.CategoryId, x => x.MapFrom(x => x.Id))
                 .ReverseMap();
 
             CreateMap<BaseEntityResponse<Category>, BaseEntityResponse<CategoryResponseDto>>()
                 .ReverseMap();
 
             CreateMap<Category, CategorySelectResponseDto>()
+                .ForMember(x => x.CategoryId, x => x.MapFrom(x => x.Id))
                 .ReverseMap();
             
             CreateMap<CategoryRequestDto, Category>();

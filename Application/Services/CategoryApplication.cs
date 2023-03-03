@@ -48,7 +48,7 @@ namespace Application.Services
         public async Task<BaseResponse<IEnumerable<CategorySelectResponseDto>>> ListSelectCategory()
         {
             var response = new BaseResponse<IEnumerable<CategorySelectResponseDto>>();
-            var categories = await _unitOfWork.Category.ListSelectCategories();
+            var categories = await _unitOfWork.Category.GetAllAsyn();
 
             if(categories is not null)
             {
@@ -68,7 +68,7 @@ namespace Application.Services
         public async Task<BaseResponse<CategoryResponseDto>> CategoryById(int categoryId)
         {
             var response = new BaseResponse<CategoryResponseDto>();
-            var category = await _unitOfWork.Category.CategoryById(categoryId);
+            var category = await _unitOfWork.Category.GetByIdAsync(categoryId);
             
             if(category is not null)
             {
@@ -99,7 +99,7 @@ namespace Application.Services
             }
 
             var category = _mapper.Map<Category>(requestDto);
-            response.Data = await _unitOfWork.Category.RegisterCategory(category);
+            response.Data = await _unitOfWork.Category.RegisterAsync(category);
 
             if (response.Data)
             {
@@ -138,8 +138,8 @@ namespace Application.Services
             }
 
             var category = _mapper.Map<Category>(requestDto);
-            category.CategoryId = categoryId;
-            response.Data = await _unitOfWork.Category.EditCategory(category);
+            category.Id = categoryId;
+            response.Data = await _unitOfWork.Category.EditAsync(category);
 
             if (response.Data)
             {
@@ -167,7 +167,7 @@ namespace Application.Services
                 return response;
             }
 
-            response.Data = await _unitOfWork.Category.RemoveCategory(categoryId);
+            response.Data = await _unitOfWork.Category.RemoveAsync(categoryId);
 
             if (response.Data)
             {

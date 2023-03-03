@@ -8,8 +8,9 @@ namespace Infrastructure.Persistences.Contexts.Configurations
     {
         public void Configure(EntityTypeBuilder<Client> builder)
         {
-            builder.HasKey(e => e.ClientId).HasName("PK__Clients__E67E1A245753FF65");
+            builder.HasKey(e => e.Id).HasName("PK__Clients__E67E1A245753FF65");
 
+            builder.Property(e => e.Id).HasColumnName("ClientId");
             builder.Property(e => e.Address).IsUnicode(false);
             builder.Property(e => e.DocumentNumber)
                 .HasMaxLength(20)

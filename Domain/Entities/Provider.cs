@@ -3,10 +3,8 @@ using System.Collections.Generic;
 
 namespace Domain.Entities;
 
-public partial class Provider
+public partial class Provider : BaseEntity
 {
-    public int ProviderId { get; set; }
-
     public string Name { get; set; } = null!;
 
     public string Email { get; set; } = null!;
@@ -18,20 +16,6 @@ public partial class Provider
     public string? Address { get; set; }
 
     public string Phone { get; set; } = null!;
-
-    public int State { get; set; }
-
-    public int AuditCreateUser { get; set; }
-
-    public DateTime AuditCreateDate { get; set; }
-
-    public int? AuditUpdateUser { get; set; }
-
-    public DateTime? AuditUpdateDate { get; set; }
-
-    public int? AuditDeleteUser { get; set; }
-
-    public DateTime? AuditDeleteDate { get; set; }
 
     public virtual DocumentType DocumentType { get; set; } = null!;
 

@@ -4,13 +4,8 @@ using Infrastructure.Commons.Bases.Responses;
 
 namespace Infrastructure.Persistences.Interfaces
 {
-    public interface ICategoryRepository
+    public interface ICategoryRepository : IGenericRepository<Category>
     {
         Task<BaseEntityResponse<Category>> ListCategories(BaseFiltersRequest filters);
-        Task<IEnumerable<Category>> ListSelectCategories();
-        Task<Category> CategoryById(int CategoryId);
-        Task<bool> RegisterCategory(Category category);
-        Task<bool> EditCategory (Category category);
-        Task<bool> RemoveCategory (int CategoryId);
     }
 }

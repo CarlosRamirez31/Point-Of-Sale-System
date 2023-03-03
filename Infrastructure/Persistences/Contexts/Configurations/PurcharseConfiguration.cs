@@ -8,8 +8,9 @@ namespace Infrastructure.Persistences.Contexts.Configurations
     {
         public void Configure(EntityTypeBuilder<Purcharse> builder)
         {
-            builder.HasKey(e => e.PurcharseId).HasName("PK__Purchars__A98C674B7D879663");
+            builder.HasKey(e => e.Id).HasName("PK__Purchars__A98C674B7D879663");
 
+            builder.Property(e => e.Id).HasColumnName("PurcharseId");
             builder.Property(e => e.Tax).HasColumnType("decimal(18, 2)");
             builder.Property(e => e.Total).HasColumnType("decimal(18, 2)");
 
