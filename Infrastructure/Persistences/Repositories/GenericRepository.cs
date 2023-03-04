@@ -12,8 +12,8 @@ namespace Infrastructure.Persistences.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T: BaseEntity
     {
-        public readonly PosContext _context;
-        public readonly DbSet<T> _entity;
+        private readonly PosContext _context;
+        private readonly DbSet<T> _entity;
 
         public GenericRepository(PosContext context)
         {
