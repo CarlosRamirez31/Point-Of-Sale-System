@@ -1,6 +1,6 @@
 ﻿using Application.Commons.Base.Response;
-using Application.Dtos.Request;
-using Application.Dtos.Response;
+using Application.Dtos.Category.Request;
+using Application.Dtos.Category.Response;
 using Infrastructure.Commons.Bases.Requests;
 using Infrastructure.Commons.Bases.Responses;
 

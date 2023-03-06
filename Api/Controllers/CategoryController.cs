@@ -1,4 +1,4 @@
-﻿using Application.Dtos.Request;
+﻿using Application.Dtos.Category.Request;
 using Application.Interfaces;
 using Infrastructure.Commons.Bases.Requests;
 using Microsoft.AspNetCore.Http;

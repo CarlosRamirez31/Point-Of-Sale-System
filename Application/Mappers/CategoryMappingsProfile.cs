@@ -1,6 +1,6 @@
 ﻿using Application.Commons.Base.Response;
-using Application.Dtos.Request;
-using Application.Dtos.Response;
+using Application.Dtos.Category.Request;
+using Application.Dtos.Category.Response;
 using AutoMapper;
 using Domain.Entities;
 using Infrastructure.Commons.Bases.Responses;

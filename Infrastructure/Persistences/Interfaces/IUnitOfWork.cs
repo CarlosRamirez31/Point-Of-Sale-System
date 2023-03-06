@@ -2,8 +2,8 @@
 {
     public interface IUnitOfWork : IDisposable
     {
-        //Desclaraciones o matricular nuestras inferfaces a nivel de repositorio
         ICategoryRepository Category { get; }
+        IUserRepository User { get; }
         void SaveChanges();
         Task SaveChangesAsync();
     }

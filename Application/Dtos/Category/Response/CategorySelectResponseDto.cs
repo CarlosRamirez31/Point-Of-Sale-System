@@ -1,4 +1,4 @@
-﻿namespace Application.Dtos.Response
+﻿namespace Application.Dtos.Category.Response
 {
     public class CategorySelectResponseDto
     {

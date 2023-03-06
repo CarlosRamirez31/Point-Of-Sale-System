@@ -1,4 +1,4 @@
-﻿namespace Application.Dtos.Request
+﻿namespace Application.Dtos.Category.Request
 {
     public class CategoryRequestDto
     {
