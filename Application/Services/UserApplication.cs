@@ -62,8 +62,13 @@ namespace Application.Services
                     response.IsSuccess = true;
                     response.Data = GenerateToken(account);
                     response.Message = ReplyMessage.MESSAGE_TOKEN;
-                    return response;
                 }
+                else
+                {
+                    response.IsSuccess = false;
+                    response.Message = ReplyMessage.MESSAGE_TOKEN_ERRORS;
+                }
+                return response;
             }
             else
             {
