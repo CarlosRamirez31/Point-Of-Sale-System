@@ -99,7 +99,7 @@ namespace Application.Services
                 issuer: _configuration["Jwt:Issuer"],
                 audience: _configuration["Jwt:issuer"],
                 claims: claims,
-                expires: DateTime.UtcNow.AddHours(int.Parse(_configuration["Jwt:Expires"])),
+                expires: DateTime.UtcNow.AddHours(int.Parse(_configuration["Jwt:Expires"]!)),
                 notBefore: DateTime.UtcNow,
                 signingCredentials: credencitals
                 );

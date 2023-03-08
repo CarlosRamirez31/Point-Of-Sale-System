@@ -1,4 +1,5 @@
-﻿using Application.Extensions;
+﻿using Api.Extensions;
+using Application.Extensions;
 using Infrastructure.Extensions;
 
 namespace Api
@@ -16,9 +17,10 @@ namespace Api
         {
             services.AddInjectionInfrastructure(Configuration);
             services.AddInjectionApplication(Configuration);
+            services.AddAuthentication(Configuration);
             services.AddControllers();
             services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen();
+            services.AddSwagger();
         }
 
         public void Configure(IApplicationBuilder app, IHostEnvironment env)
@@ -33,6 +35,8 @@ namespace Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

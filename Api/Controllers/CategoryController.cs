@@ -1,11 +1,13 @@
 ﻿using Application.Dtos.Category.Request;
 using Application.Interfaces;
 using Infrastructure.Commons.Bases.Requests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    [Authorize]
     [Route("api/category")]
     [ApiController]
     public class CategoryController : ControllerBase
