@@ -55,6 +55,24 @@ public partial class PosContext : DbContext
 
     public virtual DbSet<UsersBranchOffice> UsersBranchOffices { get; set; }
 
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+    {
+        foreach(var entry in ChangeTracker.Entries<BaseEntity>())
+        {
+            switch (entry.State)
+            {
+                case EntityState.Added:
+                    entry.Entity.AuditCreateDate = DateTime.Now;
+                    break;
+                case EntityState.Modified:
+                    entry.Entity.AuditUpdateDate = DateTime.Now;
+                    break;
+            }
+        }
+
+        return base.SaveChangesAsync(cancellationToken);
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasAnnotation("Relational:Collation", "Modeln_Spanish_CI_AS");

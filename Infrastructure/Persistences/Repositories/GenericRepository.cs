@@ -32,25 +32,23 @@ namespace Infrastructure.Persistences.Repositories
 
         public async Task<T> GetByIdAsync(int id)
         {
-            var response = await _entity.Where(e => e.Id.Equals(id)).FirstOrDefaultAsync();
+            var response = await _entity!.AsNoTracking().Where(e => e.Id.Equals(id)).FirstOrDefaultAsync();
 
             return response!;
         }
-
-        public async Task<bool> EditAsync(T entity)
+        
+        public async Task<bool> RegisterAsync(T entity)
         {
             entity.AuditCreateUser = 1;
-            entity.AuditCreateDate = DateTime.Now;
             
             await _context.AddAsync(entity);
             var recordsAffected = await _context.SaveChangesAsync();
             return recordsAffected > 0;
         }
 
-        public async Task<bool> RegisterAsync(T entity)
+        public async Task<bool> EditAsync(T entity)
         {
             entity.AuditUpdateUser = 1;
-            entity.AuditUpdateDate = DateTime.Now;
 
             _context.Update(entity);
             _context.Entry(entity).Property(c => c.AuditCreateUser).IsModified = false;
