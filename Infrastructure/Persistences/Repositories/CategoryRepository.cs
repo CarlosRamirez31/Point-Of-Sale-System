@@ -15,7 +15,8 @@ namespace Infrastructure.Persistences.Repositories
         {
             var response = new BaseEntityResponse<Category>();
 
-            var categories = GetEntityQuery(c => c.AuditDeleteUser == null && c.AuditDeleteDate == null);
+            var categories = GetEntityQuery(c => c.AuditDeleteUser == null && c.AuditDeleteDate == null)
+                .AsNoTracking();
 
             if(filters.NumFilter is not null && !string.IsNullOrEmpty(filters.TextFilter))
             {
