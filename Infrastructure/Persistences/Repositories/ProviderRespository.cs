@@ -17,7 +17,8 @@ namespace Infrastructure.Persistences.Repositories
         public async Task<BaseEntityResponse<Provider>> ListProvider(BaseFiltersRequest filter)
         {
             var response = new BaseEntityResponse<Provider>();
-            var provider = GetEntityQuery(x => x.State.Equals((int)StateType.Activo) && x.AuditDeleteUser == null && x.AuditDeleteDate == null)
+            var provider = GetEntityQuery(x => x.AuditDeleteUser == null && x.AuditDeleteDate == null)
+                .Include(x => x.DocumentType)
                 .AsNoTracking();
 
             if (filter.NumFilter is not null && !string.IsNullOrEmpty(filter.TextFilter))
@@ -31,7 +32,7 @@ namespace Infrastructure.Persistences.Repositories
                         provider = provider.Where(p => p.Email.Contains(filter.TextFilter));
                         break;
                     case 3: 
-                        provider = provider.Where(p => p.DocumentNumber.Equals(filter.TextFilter));
+                        provider = provider.Where(p => p.DocumentNumber.Contains(filter.TextFilter));
                         break;
                 }
             }

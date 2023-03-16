@@ -8,13 +8,13 @@ namespace Application.Dtos.Provider.Response
 {
     public class ProviderResponseDto
     {
-        public int providerId { get; set; }
+        public int ProviderId { get; set; }
 
         public string? Name { get; set; } 
 
         public string? Email { get; set; } 
 
-        public int? DocumentType { get; set; }
+        public string? DocumentType { get; set; }
 
         public string? DocumentNumber { get; set; } 
 

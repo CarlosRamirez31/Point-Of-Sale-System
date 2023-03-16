@@ -16,7 +16,7 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> ListProvider(BaseFiltersRequest filter)
+        public async Task<ActionResult> ListProvider([FromBody] BaseFiltersRequest filter)
         {
             var provider = await _providerApplication.ListProvider(filter); 
             return Ok(provider);
