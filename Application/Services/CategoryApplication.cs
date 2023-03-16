@@ -30,7 +30,7 @@ namespace Application.Services
             var response = new BaseResponse<BaseEntityResponse<CategoryResponseDto>>();
             var categories = await _unitOfWork.Category.ListCategories(filters);
 
-            if(categories is not null)
+            if(categories.TotalRecords != (int)ItemStatus.Empty)
             {
                 response.IsSuccess = true;
                 response.Data = _mapper.Map<BaseEntityResponse<CategoryResponseDto>>(categories);

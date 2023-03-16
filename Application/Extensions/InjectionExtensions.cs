@@ -23,6 +23,8 @@ namespace Application.Extensions
 
             services.AddScoped<IUserApplication, UserApplication>();
 
+            services.AddScoped<IProviderApplication, ProviderApplication>();
+
             return services;
         }
     }

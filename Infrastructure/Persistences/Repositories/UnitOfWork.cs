@@ -8,12 +8,14 @@ namespace Infrastructure.Persistences.Repositories
         private readonly PosContext _context;
         public ICategoryRepository Category { get; private set; }
         public IUserRepository User { get; private set; }
+        public IProviderRepository Provider { get; private set; } 
 
         public UnitOfWork(PosContext context)
         {
             _context = context;
             Category = new CategoryRepository(_context);
             User = new UserRespository(_context);
+            Provider = new ProviderRespository(_context);
         }
 
         public void Dispose()

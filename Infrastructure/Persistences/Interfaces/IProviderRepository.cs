@@ -6,6 +6,6 @@ namespace Infrastructure.Persistences.Interfaces
 {
     public interface IProviderRepository : IGenericRepository<Provider>
     {
-        Task<IEnumerable<BaseEntityResponse<Provider>>> ListProvider(BaseFiltersRequest filter);
+        Task<BaseEntityResponse<Provider>> ListProvider(BaseFiltersRequest filter);
     }
 }

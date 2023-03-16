@@ -4,8 +4,8 @@ using Infrastructure.Commons.Bases.Responses;
 using Infrastructure.Persistences.Contexts;
 using Infrastructure.Persistences.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 using System.Security.Cryptography.X509Certificates;
+using Utilities.Static;
 
 namespace Infrastructure.Persistences.Repositories
 {
@@ -17,7 +17,7 @@ namespace Infrastructure.Persistences.Repositories
         public async Task<BaseEntityResponse<Provider>> ListProvider(BaseFiltersRequest filter)
         {
             var response = new BaseEntityResponse<Provider>();
-            var provider = GetEntityQuery(c => c.AuditDeleteUser != null && c.AuditDeleteDate != null)
+            var provider = GetEntityQuery(x => x.State.Equals((int)StateType.Activo) && x.AuditDeleteUser == null && x.AuditDeleteDate == null)
                 .AsNoTracking();
 
             if (filter.NumFilter is not null && !string.IsNullOrEmpty(filter.TextFilter))
@@ -47,7 +47,7 @@ namespace Infrastructure.Persistences.Repositories
                 p.AuditCreateDate <= Convert.ToDateTime(filter.EndDate).AddDays(1));
             }
 
-            if (filter.Sort is null) filter.Sort = "asc";
+            if (filter.Sort is null) filter.Sort = "Id";
 
             response.TotalRecords = await provider.CountAsync();
             response.Items = await Ordering(filter, provider, filter.Download.GetValueOrDefault()).ToListAsync();

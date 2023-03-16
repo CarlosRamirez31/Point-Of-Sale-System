@@ -4,6 +4,7 @@
     {
         ICategoryRepository Category { get; }
         IUserRepository User { get; }
+        IProviderRepository Provider { get; }
         void SaveChanges();
         Task SaveChangesAsync();
     }
