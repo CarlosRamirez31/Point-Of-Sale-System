@@ -37,6 +37,17 @@ namespace Infrastructure.Persistences.Repositories
             return response!;
         }
         
+        public async Task<T> GetByIdAsync(int id, params Expression<Func<T, object>>[] includeEntities)
+        {
+            IQueryable<T>? query = _entity;
+            foreach(var includeEntity in includeEntities)
+            {
+                query = query.Include(includeEntity);
+            }
+
+            return await query.AsNoTracking().Where(x => x.Id.Equals(id)).FirstOrDefaultAsync();
+        }
+
         public async Task<bool> RegisterAsync(T entity)
         {
             entity.AuditCreateUser = 1;

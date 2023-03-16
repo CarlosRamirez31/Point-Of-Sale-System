@@ -21,5 +21,12 @@ namespace Api.Controllers
             var provider = await _providerApplication.ListProvider(filter); 
             return Ok(provider);
         }
+
+        [HttpGet("{providerId:int}")]
+        public async Task<ActionResult> GetByIdProvider(int providerId)
+        {
+            var provider = await _providerApplication.GetByIdProvider(providerId);
+            return Ok(provider);
+        }
     }
 }

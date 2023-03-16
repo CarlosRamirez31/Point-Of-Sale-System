@@ -8,5 +8,7 @@ namespace Application.Interfaces
     public interface IProviderApplication
     {
         Task<BaseResponse<BaseEntityResponse<ProviderResponseDto>>> ListProvider(BaseFiltersRequest filter);
+
+        Task<BaseResponse<ProviderResponseDto>> GetByIdProvider(int id);
     }
 }

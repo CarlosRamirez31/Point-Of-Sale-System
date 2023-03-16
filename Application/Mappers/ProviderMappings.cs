@@ -14,7 +14,7 @@ namespace Application.Mappers
             CreateMap<Provider, ProviderResponseDto>()
                 .ForMember(x => x.ProviderId, x => x.MapFrom(y => y.Id))
                 .ForMember(x => x.DocumentType, x => x.MapFrom(y => y.DocumentType.Abbreviation))
-                .ForMember(x => x.StateProvider, x => x.MapFrom(y => y.State.Equals(StateType.Activo) ? "Activo" : "Inactivo"))
+                .ForMember(x => x.StateProvider, x => x.MapFrom(y => y.State.Equals((int)StateType.Activo) ? "Activo" : "Inactivo"))
                 .ReverseMap();
 
             CreateMap<BaseEntityResponse<Provider>, BaseEntityResponse<ProviderResponseDto>>()

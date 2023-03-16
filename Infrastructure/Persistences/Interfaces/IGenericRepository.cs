@@ -8,6 +8,7 @@ namespace Infrastructure.Persistences.Interfaces
     {
         Task<IEnumerable<T>> GetAllAsyn();
         Task<T> GetByIdAsync(int id);
+        Task<T> GetByIdAsync(int id, params Expression<Func<T, object>>[] includeEntities);
         Task<bool> RegisterAsync(T entity);
         Task<bool> EditAsync(T entity);
         Task<bool> RemoveAsync(int id);
