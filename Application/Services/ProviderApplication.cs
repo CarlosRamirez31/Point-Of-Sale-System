@@ -1,9 +1,12 @@
 ﻿using Application.Commons.Base.Response;
+using Application.Dtos.Provider.Request;
 using Application.Dtos.Provider.Response;
 using Application.Interfaces;
+using Application.Validators.Provider;
 using AutoMapper;
 using Azure;
 using Domain.Entities;
+using FluentValidation;
 using Infrastructure.Commons.Bases.Requests;
 using Infrastructure.Commons.Bases.Responses;
 using Infrastructure.Persistences.Contexts;
@@ -14,14 +17,15 @@ namespace Application.Services
 {
     public class ProviderApplication : IProviderApplication
     {
-        private readonly PosContext _context;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly ProviderValidator _validationsRules;
 
-        public ProviderApplication(IUnitOfWork unitOfWork, IMapper mapper)
+        public ProviderApplication(IUnitOfWork unitOfWork, IMapper mapper, ProviderValidator validationsRules)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _validationsRules = validationsRules;
         }
 
         public async Task<BaseResponse<BaseEntityResponse<ProviderResponseDto>>> ListProvider(BaseFiltersRequest filter)
@@ -58,6 +62,36 @@ namespace Application.Services
             {
                 response.IsSuccess = false;
                 response.Message = ReplyMessage.MESSAGE_QUERY_EMPTY;
+            }
+
+            return response;
+        }
+
+        public async Task<BaseResponse<bool>> RegisterProvider(ProviderRequestDto requestDto)
+        {
+            var response = new BaseResponse<bool>();
+            var validation = _validationsRules.Validate(requestDto);
+
+            if (!validation.IsValid)
+            {
+                response.IsSuccess = false;
+                response.Message = ReplyMessage.MESSAGE_VALIDATE;
+                response.Errors = validation.Errors;
+                return response;
+            }
+
+            var provider = _mapper.Map<Provider>(requestDto);
+            response.Data = await _unitOfWork.Provider.RegisterAsync(provider);
+
+            if (response.Data)
+            {
+                response.IsSuccess = true;
+                response.Message = ReplyMessage.MESSAGE_SAVE;
+            }
+            else
+            {
+                response.IsSuccess = false;
+                response.Message = ReplyMessage.MESSAGE_FAILED;
             }
 
             return response;

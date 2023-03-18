@@ -12,12 +12,14 @@ namespace Application.Dtos.Provider.Request
 
         public string? Email { get; set; } 
 
-        public int? DocumentType { get; set; }
+        public int? DocumentTypeId { get; set; }
 
         public string? DocumentNumber { get; set; } 
 
         public string? Address { get; set; }
 
         public string? Phone { get; set; }
+
+        public int? State { get; set; }
     }
 }

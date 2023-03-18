@@ -1,6 +1,8 @@
-﻿using Application.Interfaces;
+﻿using Application.Dtos.Provider.Request;
+using Application.Interfaces;
 using Infrastructure.Commons.Bases.Requests;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.InteropServices;
 
 namespace Api.Controllers
 {
@@ -22,10 +24,17 @@ namespace Api.Controllers
             return Ok(provider);
         }
 
-        [HttpGet("{providerId:int}")]
-        public async Task<ActionResult> GetByIdProvider(int providerId)
+        [HttpGet("{Id:int}")]
+        public async Task<ActionResult> GetByIdProvider(int id)
         {
-            var provider = await _providerApplication.GetByIdProvider(providerId);
+            var provider = await _providerApplication.GetByIdProvider(id);
+            return Ok(provider);
+        }
+
+        [HttpPost("Register")]
+        public async Task<ActionResult> RegisterProvider(ProviderRequestDto requestDto)
+        {
+            var provider = await _providerApplication.RegisterProvider(requestDto);
             return Ok(provider);
         }
     }
