@@ -24,7 +24,7 @@ namespace Api.Controllers
             return Ok(provider);
         }
 
-        [HttpGet("{Id:int}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult> GetByIdProvider(int id)
         {
             var provider = await _providerApplication.GetByIdProvider(id);
@@ -35,6 +35,13 @@ namespace Api.Controllers
         public async Task<ActionResult> RegisterProvider(ProviderRequestDto requestDto)
         {
             var provider = await _providerApplication.RegisterProvider(requestDto);
+            return Ok(provider);
+        }
+
+        [HttpPut("Edit/{id:int}")]
+        public async Task<ActionResult> EditProvider(int id, ProviderRequestDto requestDto)
+        {
+            var provider = await _providerApplication.EditProvider(id, requestDto);
             return Ok(provider);
         }
     }

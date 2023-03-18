@@ -11,5 +11,6 @@ namespace Application.Interfaces
         Task<BaseResponse<BaseEntityResponse<ProviderResponseDto>>> ListProvider(BaseFiltersRequest filter);
         Task<BaseResponse<ProviderResponseDto>> GetByIdProvider(int id);
         Task<BaseResponse<bool>> RegisterProvider(ProviderRequestDto requestDto);
+        Task<BaseResponse<bool>> EditProvider(int id, ProviderRequestDto requestDto);
     }
 }

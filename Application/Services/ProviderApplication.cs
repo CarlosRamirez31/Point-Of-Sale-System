@@ -96,5 +96,19 @@ namespace Application.Services
 
             return response;
         }
+
+        public Task<BaseResponse<bool>> EditProvider(int id, ProviderRequestDto requestDto)
+        {
+            var response = new BaseResponse<bool>();
+            var validation = _validationsRules.Validate(requestDto);
+            var providerById = _mapper.Map<Provider>(requestDto);
+
+            if (!validation.IsValid)
+            {
+                response.IsSuccess = false;
+                response.Message = ReplyMessage.MESSAGE_VALIDATE;
+                response.Errors = validation.Errors;
+            }
+        }
     }
 }
