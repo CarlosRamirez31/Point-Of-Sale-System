@@ -1,11 +1,13 @@
 ﻿using Application.Dtos.Provider.Request;
 using Application.Interfaces;
 using Infrastructure.Commons.Bases.Requests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.InteropServices;
 
 namespace Api.Controllers
 {
+    [Authorize]
     [Route("api/Provider")]
     [ApiController]
     public class ProviderController : ControllerBase
@@ -42,6 +44,13 @@ namespace Api.Controllers
         public async Task<ActionResult> EditProvider(int id, ProviderRequestDto requestDto)
         {
             var provider = await _providerApplication.EditProvider(id, requestDto);
+            return Ok(provider);
+        }
+
+        [HttpDelete("Delete/{id:int}")]
+        public async Task<ActionResult> RemoveProvider(int id)
+        {
+            var provider = await _providerApplication.RemoveProvider(id);
             return Ok(provider);
         }
     }

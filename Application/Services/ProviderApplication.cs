@@ -4,12 +4,9 @@ using Application.Dtos.Provider.Response;
 using Application.Interfaces;
 using Application.Validators.Provider;
 using AutoMapper;
-using Azure;
 using Domain.Entities;
-using FluentValidation;
 using Infrastructure.Commons.Bases.Requests;
 using Infrastructure.Commons.Bases.Responses;
-using Infrastructure.Persistences.Contexts;
 using Infrastructure.Persistences.Interfaces;
 using Utilities.Static;
 
@@ -97,18 +94,70 @@ namespace Application.Services
             return response;
         }
 
-        public Task<BaseResponse<bool>> EditProvider(int id, ProviderRequestDto requestDto)
+        public async Task<BaseResponse<bool>> EditProvider(int id, ProviderRequestDto requestDto)
         {
             var response = new BaseResponse<bool>();
-            var validation = _validationsRules.Validate(requestDto);
-            var providerById = _mapper.Map<Provider>(requestDto);
+            var providerById = await GetByIdProvider(id);
 
+            if(providerById.Data is null)
+            {
+                response.IsSuccess = false;
+                response.Message = ReplyMessage.MESSAGE_FAILED;
+                return response;
+            }
+
+            var validation = _validationsRules.Validate(requestDto);
+            
             if (!validation.IsValid)
             {
                 response.IsSuccess = false;
                 response.Message = ReplyMessage.MESSAGE_VALIDATE;
                 response.Errors = validation.Errors;
+                return response;
             }
+
+            var provider = _mapper.Map<Provider>(requestDto);
+            provider.Id = id;
+            response.Data = await _unitOfWork.Provider.EditAsync(provider);
+
+            if (response.Data)
+            {
+                response.IsSuccess = true;
+                response.Message = ReplyMessage.MESSAGE_UPDATE;
+            }
+            else
+            {
+                response.IsSuccess = false;
+                response.Message = ReplyMessage.MESSAGE_EXISTS;
+            }
+            return response;
+        }
+
+        public async Task<BaseResponse<bool>> RemoveProvider(int id)
+        {
+            var response = new BaseResponse<bool>();
+            var providerById = await GetByIdProvider(id);
+
+            if(providerById.Data is null)
+            {
+                response.IsSuccess = false;
+                response.Message = ReplyMessage.MESSAGE_FAILED;
+                return response;
+            }
+
+            response.Data = await _unitOfWork.Provider.RemoveAsync(1);
+
+            if (response.Data)
+            {
+                response.IsSuccess = true;
+                response.Message = ReplyMessage.MESSAGE_DELETE;
+            }
+            else
+            {
+                response.IsSuccess = false;
+                response.Message = ReplyMessage.MESSAGE_FAILED;
+            }
+            return response;
         }
     }
 }

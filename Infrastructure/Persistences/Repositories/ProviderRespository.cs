@@ -4,8 +4,6 @@ using Infrastructure.Commons.Bases.Responses;
 using Infrastructure.Persistences.Contexts;
 using Infrastructure.Persistences.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography.X509Certificates;
-using Utilities.Static;
 
 namespace Infrastructure.Persistences.Repositories
 {

@@ -12,5 +12,6 @@ namespace Application.Interfaces
         Task<BaseResponse<ProviderResponseDto>> GetByIdProvider(int id);
         Task<BaseResponse<bool>> RegisterProvider(ProviderRequestDto requestDto);
         Task<BaseResponse<bool>> EditProvider(int id, ProviderRequestDto requestDto);
+        Task<BaseResponse<bool>> RemoveProvider(int id);
     }
 }
