@@ -1,6 +1,7 @@
 ﻿using Api.Extensions;
 using Application.Extensions;
 using Infrastructure.Extensions;
+using WatchDog;
 
 namespace Api
 {
@@ -32,6 +33,8 @@ namespace Api
                 app.UseSwaggerUI();
             }
 
+            app.UseWatchDogExceptionLogger();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -43,6 +46,12 @@ namespace Api
             app.UseEndpoints(endpoint =>
             {
                 endpoint.MapControllers();
+            });
+
+            app.UseWatchDog(configurations =>
+            {
+                configurations.WatchPageUsername = "admin";
+                configurations.WatchPagePassword = "admin";
             });
         }
     }

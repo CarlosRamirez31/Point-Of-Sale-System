@@ -1,11 +1,9 @@
 ﻿using Application.Interfaces;
 using Application.Services;
 using FluentValidation;
-using FluentValidation.AspNetCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using System.Reflection.Metadata.Ecma335;
 
 namespace Application.Extensions
 {
@@ -24,6 +22,8 @@ namespace Application.Extensions
             services.AddScoped<IUserApplication, UserApplication>();
 
             services.AddScoped<IProviderApplication, ProviderApplication>();
+
+            services.AddWatchDog();
 
             return services;
         }
