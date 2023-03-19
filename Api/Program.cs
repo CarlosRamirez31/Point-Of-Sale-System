@@ -39,3 +39,5 @@ app.UseWatchDog(configurations =>
 });
 
 app.Run();
+
+public partial class Program { }

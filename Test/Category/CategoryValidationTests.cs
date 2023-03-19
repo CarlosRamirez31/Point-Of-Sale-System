@@ -1,5 +1,5 @@
 ﻿using Api;
-using Application.Dtos.Request;
+using Application.Dtos.Category.Request;
 using Application.Interfaces;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,7 +11,7 @@ namespace Test.Category
     [TestClass]
     public class CategoryValidationTests
     {
-        private static WebApplicationFactory<Startup>? _factory = null;
+        private static WebApplicationFactory<Program>? _factory = null;
         private static IServiceScopeFactory? _scopeFactory = null;
 
         [ClassInitialize]
