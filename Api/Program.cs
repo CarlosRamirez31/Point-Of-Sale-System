@@ -34,8 +34,8 @@ app.MapControllers();
 
 app.UseWatchDog(configurations =>
 {
-    configurations.WatchPageUsername = "admin";
-    configurations.WatchPagePassword = "admin";
+    configurations.WatchPageUsername = Configuration["WatchDog:Username"];
+    configurations.WatchPagePassword = Configuration["WatchDog:Password"];
 });
 
 app.Run();
